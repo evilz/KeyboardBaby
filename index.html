@@ -124,6 +124,26 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
+      .language-selector {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .language-selector select {
+        font-size: 16px;
+        padding: 5px 10px;
+        border: 2px solid #333;
+        border-radius: 5px;
+        background: white;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body
@@ -133,6 +153,14 @@
     @resize.window="resize()"
   >
     <audio x-ref="audio"></audio>
+
+    <div class="language-selector">
+      <select x-model="language" @change="changeLanguage()">
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="fr">🇫🇷 Français</option>
+      </select>
+    </div>
 
     <template x-for="item in items">
       <div class="box" x-bind:style="item.position">
@@ -230,9 +258,23 @@
           items: [],
           height: 0,
           width: 0,
+          language: 'en',
           init(audio) {
             audioRef = audio;
             this.resize();
+            this.loadLanguageFromURL();
+          },
+          loadLanguageFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang');
+            if (lang && ['en', 'de', 'fr'].includes(lang)) {
+              this.language = lang;
+            }
+          },
+          changeLanguage() {
+            const url = new URL(window.location);
+            url.searchParams.set('lang', this.language);
+            window.history.pushState({}, '', url);
           },
           resize() {
             this.height = document.body.offsetHeight;
@@ -252,7 +294,7 @@
             }
 
             this.items.push(item);
-            play(`sound/${item.char}.mp3`);
+            play(`sound/${this.language}/${item.char}.mp3`);
             if (this.items.length > maxItems) this.items.shift();
           },
         };
