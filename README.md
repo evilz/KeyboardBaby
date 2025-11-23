@@ -45,6 +45,17 @@ Sound files are organized by language in the `sound/` directory:
 
 **Note:** German and French sound files are currently placeholders using English audio. Contributors are welcome to provide proper German and French pronunciation recordings!
 
+### Audio File Specifications
+
+When contributing audio files for new languages, please follow these guidelines:
+- **Format:** MP3 (`.mp3` extension)
+- **Bitrate:** 128 kbps or higher
+- **Sample Rate:** 44.1 kHz recommended
+- **Duration:** 0.5-2 seconds per file (short and clear)
+- **Quality:** Clear pronunciation by native speakers
+- **Volume:** Normalized to avoid clipping
+- **Naming:** Match the character exactly (e.g., `A.mp3`, `0.mp3`, `🐵.mp3`)
+
 ## Contributing
 
 Contributions are welcome! Particularly needed:
