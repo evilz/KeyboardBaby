@@ -17,7 +17,7 @@ The German (`de`) and French (`fr`) directories currently contain copies of the 
 **Option 1 - Generate using script:**
 ```bash
 pip install gTTS
-python3 ../scripts/generate_audio.py
+python3 scripts/generate_audio.py
 ```
 
 **Option 2 - Download from free resources:**

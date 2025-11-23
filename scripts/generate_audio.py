@@ -43,14 +43,21 @@ letters = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
 characters = numbers + letters
 
 def generate_audio(char, lang_code, lang_name):
-    """Generate audio file for a character in a specific language."""
+    """
+    Generate audio file for a character in a specific language.
+    
+    Returns:
+        'generated' - File was successfully generated
+        'skipped' - File already exists
+        'failed' - Generation failed
+    """
     output_dir = sound_dir / lang_code
     output_path = output_dir / f"{char}.mp3"
     
     # Skip if file already exists and is not empty
     if output_path.exists() and output_path.stat().st_size > 0:
         print(f"⊘ Skipping {lang_name} {char} (already exists)")
-        return True
+        return 'skipped'
     
     try:
         # Create gTTS object
@@ -61,10 +68,10 @@ def generate_audio(char, lang_code, lang_name):
         # Save the audio file
         tts.save(str(output_path))
         print(f"✓ Generated {lang_name} audio for: {char}")
-        return True
+        return 'generated'
     except Exception as e:
         print(f"✗ Failed to generate {lang_name} audio for {char}: {e}")
-        return False
+        return 'failed'
 
 def main():
     """Main function to generate all audio files."""
@@ -93,12 +100,11 @@ def main():
         
         for char in characters:
             result = generate_audio(char, lang_code, lang_name)
-            if result:
-                if (sound_dir / lang_code / f"{char}.mp3").stat().st_size > 0:
-                    total_generated += 1
-                else:
-                    total_skipped += 1
-            else:
+            if result == 'generated':
+                total_generated += 1
+            elif result == 'skipped':
+                total_skipped += 1
+            elif result == 'failed':
                 total_failed += 1
     
     print()
