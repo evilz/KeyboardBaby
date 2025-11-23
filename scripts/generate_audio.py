@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate German and French pronunciation audio files using Google Text-to-Speech.
+Generate pronunciation audio files for multiple languages using Google Text-to-Speech.
 
 Requirements:
     pip install gTTS
@@ -9,10 +9,10 @@ Usage:
     python3 generate_audio.py
 
 This script will generate MP3 files for:
-- Numbers 0-9 in German and French
-- Letters A-Z in German and French
+- Numbers 0-9 in German, French, Italian, and Spanish
+- Letters A-Z in German, French, Italian, and Spanish
 
-The files will be saved in the sound/de/ and sound/fr/ directories.
+The files will be saved in the sound/de/, sound/fr/, sound/it/, and sound/es/ directories.
 """
 
 import os
@@ -34,7 +34,9 @@ sound_dir = project_root / "sound"
 # Language configurations
 languages = {
     'de': {'name': 'German', 'code': 'de'},
-    'fr': {'name': 'French', 'code': 'fr'}
+    'fr': {'name': 'French', 'code': 'fr'},
+    'it': {'name': 'Italian', 'code': 'it'},
+    'es': {'name': 'Spanish', 'code': 'es'}
 }
 
 # Characters to generate
@@ -77,7 +79,7 @@ def main():
     """Main function to generate all audio files."""
     print("=" * 70)
     print("Audio File Generator for KeyboardBaby")
-    print("Generating German and French pronunciation files...")
+    print("Generating pronunciation files for multiple languages...")
     print("=" * 70)
     print()
     

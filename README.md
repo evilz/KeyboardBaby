@@ -10,6 +10,8 @@ A fun, educational web application for babies and toddlers to learn letters, num
   - 🇬🇧 English
   - 🇩🇪 German (Deutsch)
   - 🇫🇷 French (Français)
+  - 🇮🇹 Italian (Italiano)
+  - 🇪🇸 Spanish (Español)
 - 😊 Fun emoji animations for special keys
 - 📱 Responsive design that works on various screen sizes
 
@@ -29,12 +31,16 @@ Click the language selector dropdown in the top-right corner to switch between l
 - 🇬🇧 English
 - 🇩🇪 Deutsch (German)
 - 🇫🇷 Français (French)
+- 🇮🇹 Italiano (Italian)
+- 🇪🇸 Español (Spanish)
 
 #### Using URL Parameters
 You can also set the language via URL parameter:
 - English: `index.html?lang=en`
 - German: `index.html?lang=de`
 - French: `index.html?lang=fr`
+- Italian: `index.html?lang=it`
+- Spanish: `index.html?lang=es`
 
 ## Sound Files
 
@@ -42,14 +48,16 @@ Sound files are organized by language in the `sound/` directory:
 - `sound/en/` - English pronunciations ✅
 - `sound/de/` - German pronunciations ⚠️ (currently placeholders)
 - `sound/fr/` - French pronunciations ⚠️ (currently placeholders)
+- `sound/it/` - Italian pronunciations ⚠️ (currently placeholders)
+- `sound/es/` - Spanish pronunciations ⚠️ (currently placeholders)
 
-**Note:** German and French sound files are currently placeholders using English audio. 
+**Note:** German, French, Italian, and Spanish sound files are currently placeholders using English audio. 
 
-### Getting German and French Audio Files
+### Getting Audio Files for Non-English Languages
 
 To replace the placeholder audio files with proper native pronunciations, you have several options:
 
-1. **Use the shell script** (offline, requires espeak-ng + ffmpeg):
+1. **Use the shell script** (Linux/macOS, offline, requires espeak-ng + ffmpeg):
    ```bash
    # Install dependencies (Debian/Ubuntu)
    sudo apt-get install espeak-ng ffmpeg
@@ -59,20 +67,30 @@ To replace the placeholder audio files with proper native pronunciations, you ha
    ./scripts/generate_audio.sh
    ```
 
-2. **Use the Python script** (requires internet connection):
+2. **Use the PowerShell script** (Windows, offline, requires espeak-ng + ffmpeg):
+   ```powershell
+   # Install dependencies (using winget)
+   winget install ffmpeg
+   # Download espeak-ng from: https://github.com/espeak-ng/espeak-ng/releases
+   
+   # Run the generator
+   .\scripts\generate_audio.ps1
+   ```
+
+3. **Use the Python script** (cross-platform, requires internet connection):
    ```bash
    pip install gTTS
    python3 scripts/generate_audio.py
    ```
 
-3. **Download from free resources**:
-   - See [`sound/AUDIO_SOURCES.md`](sound/AUDIO_SOURCES.md) for a list of free German and French pronunciation resources
+4. **Download from free resources**:
+   - See [`sound/AUDIO_SOURCES.md`](sound/AUDIO_SOURCES.md) for a list of free pronunciation resources
    - Resources include Light Bulb Languages, Phrase Guides, and 50Languages.com
 
-4. **Record yourself** (if you're a native speaker):
+5. **Record yourself** (if you're a native speaker):
    - Record clear pronunciations of letters A-Z and numbers 0-9
    - Export as MP3 files following the specifications below
-   - Place in `sound/de/` or `sound/fr/`
+   - Place in the appropriate language directory (`sound/de/`, `sound/fr/`, `sound/it/`, or `sound/es/`)
 
 ### Audio File Specifications
 
@@ -90,6 +108,8 @@ When contributing audio files for new languages, please follow these guidelines:
 Contributions are welcome! Particularly needed:
 - Native German pronunciation recordings for letters and numbers
 - Native French pronunciation recordings for letters and numbers
+- Native Italian pronunciation recordings for letters and numbers
+- Native Spanish pronunciation recordings for letters and numbers
 
 ## License
 

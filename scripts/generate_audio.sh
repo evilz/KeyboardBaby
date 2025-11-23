@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Audio Generator Script for KeyboardBaby
-# Generates German and French pronunciation audio files using espeak-ng
+# Generates pronunciation audio files for multiple languages using espeak-ng
 # 
 # Requirements:
 #   - espeak-ng: sudo apt-get install espeak-ng
@@ -25,7 +25,7 @@ SOUND_DIR="$PROJECT_ROOT/sound"
 
 echo "========================================================================"
 echo "Audio File Generator for KeyboardBaby"
-echo "Generating German and French pronunciation files..."
+echo "Generating pronunciation files for multiple languages..."
 echo "========================================================================"
 echo ""
 
@@ -182,6 +182,12 @@ main() {
     
     # Generate French audio
     generate_all "fr" "French"
+    
+    # Generate Italian audio
+    generate_all "it" "Italian"
+    
+    # Generate Spanish audio
+    generate_all "es" "Spanish"
     
     echo "========================================================================"
     echo "Generation complete!"

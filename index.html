@@ -195,6 +195,19 @@
           <path fill="#FFF" d="M213.33 0h213.33v480H213.33z"/>
           <path fill="#002395" d="M426.67 0h213.33v480H426.67z"/>
         </symbol>
+        
+        <!-- Italian Flag -->
+        <symbol id="flag-it" viewBox="0 0 640 480">
+          <path fill="#009246" d="M0 0h213.33v480H0z"/>
+          <path fill="#FFF" d="M213.33 0h213.33v480H213.33z"/>
+          <path fill="#CE2B37" d="M426.67 0h213.33v480H426.67z"/>
+        </symbol>
+        
+        <!-- Spanish Flag -->
+        <symbol id="flag-es" viewBox="0 0 640 480">
+          <path fill="#AA151B" d="M0 0h640v480H0z"/>
+          <path fill="#F1BF00" d="M0 120h640v240H0z"/>
+        </symbol>
       </defs>
     </svg>
 
@@ -208,10 +221,18 @@
       <svg class="flag-icon" id="flag-icon-fr" style="display: none;">
         <use href="#flag-fr"/>
       </svg>
+      <svg class="flag-icon" id="flag-icon-it" style="display: none;">
+        <use href="#flag-it"/>
+      </svg>
+      <svg class="flag-icon" id="flag-icon-es" style="display: none;">
+        <use href="#flag-es"/>
+      </svg>
       <select x-model="language" @change="changeLanguage()" id="language-select">
         <option value="en">English</option>
         <option value="de">Deutsch</option>
         <option value="fr">Français</option>
+        <option value="it">Italiano</option>
+        <option value="es">Español</option>
       </select>
     </div>
 
@@ -312,6 +333,8 @@
           document.getElementById('flag-icon-en').style.display = 'none';
           document.getElementById('flag-icon-de').style.display = 'none';
           document.getElementById('flag-icon-fr').style.display = 'none';
+          document.getElementById('flag-icon-it').style.display = 'none';
+          document.getElementById('flag-icon-es').style.display = 'none';
           // Show selected flag
           document.getElementById(`flag-icon-${lang}`).style.display = 'inline-block';
         };
@@ -338,7 +361,7 @@
           loadLanguageFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
-            if (lang && ['en', 'de', 'fr'].includes(lang)) {
+            if (lang && ['en', 'de', 'fr', 'it', 'es'].includes(lang)) {
               this.language = lang;
             }
           },
