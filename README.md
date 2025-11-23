@@ -39,11 +39,30 @@ You can also set the language via URL parameter:
 ## Sound Files
 
 Sound files are organized by language in the `sound/` directory:
-- `sound/en/` - English pronunciations
-- `sound/de/` - German pronunciations
-- `sound/fr/` - French pronunciations
+- `sound/en/` - English pronunciations ✅
+- `sound/de/` - German pronunciations ⚠️ (currently placeholders)
+- `sound/fr/` - French pronunciations ⚠️ (currently placeholders)
 
-**Note:** German and French sound files are currently placeholders using English audio. Contributors are welcome to provide proper German and French pronunciation recordings!
+**Note:** German and French sound files are currently placeholders using English audio. 
+
+### Getting German and French Audio Files
+
+To replace the placeholder audio files with proper native pronunciations, you have several options:
+
+1. **Use the included generator script** (requires internet connection):
+   ```bash
+   pip install gTTS
+   python3 scripts/generate_audio.py
+   ```
+
+2. **Download from free resources**:
+   - See [`sound/AUDIO_SOURCES.md`](sound/AUDIO_SOURCES.md) for a list of free German and French pronunciation resources
+   - Resources include Light Bulb Languages, Phrase Guides, and 50Languages.com
+
+3. **Record yourself** (if you're a native speaker):
+   - Record clear pronunciations of letters A-Z and numbers 0-9
+   - Export as MP3 files following the specifications below
+   - Place in `sound/de/` or `sound/fr/`
 
 ### Audio File Specifications
 
