@@ -49,17 +49,27 @@ Sound files are organized by language in the `sound/` directory:
 
 To replace the placeholder audio files with proper native pronunciations, you have several options:
 
-1. **Use the included generator script** (requires internet connection):
+1. **Use the shell script** (offline, requires espeak-ng + ffmpeg):
+   ```bash
+   # Install dependencies (Debian/Ubuntu)
+   sudo apt-get install espeak-ng ffmpeg
+   
+   # Run the generator
+   chmod +x scripts/generate_audio.sh
+   ./scripts/generate_audio.sh
+   ```
+
+2. **Use the Python script** (requires internet connection):
    ```bash
    pip install gTTS
    python3 scripts/generate_audio.py
    ```
 
-2. **Download from free resources**:
+3. **Download from free resources**:
    - See [`sound/AUDIO_SOURCES.md`](sound/AUDIO_SOURCES.md) for a list of free German and French pronunciation resources
    - Resources include Light Bulb Languages, Phrase Guides, and 50Languages.com
 
-3. **Record yourself** (if you're a native speaker):
+4. **Record yourself** (if you're a native speaker):
    - Record clear pronunciations of letters A-Z and numbers 0-9
    - Export as MP3 files following the specifications below
    - Place in `sound/de/` or `sound/fr/`
