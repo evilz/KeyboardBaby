@@ -72,24 +72,25 @@ generate_audio() {
         # Check if it's a placeholder (compare with English version)
         local en_file="$SOUND_DIR/en/${char}.mp3"
         if [ -f "$en_file" ]; then
-            local output_size=$(stat -f%z "$output_file" 2>/dev/null || stat -c%s "$output_file" 2>/dev/null)
-            local en_size=$(stat -f%z "$en_file" 2>/dev/null || stat -c%s "$en_file" 2>/dev/null)
+            # Use portable file size check
+            local output_size=$(wc -c < "$output_file")
+            local en_size=$(wc -c < "$en_file")
             
             # If sizes match, it's probably a placeholder
             if [ "$output_size" -eq "$en_size" ]; then
                 echo -e "${YELLOW}⟳ Replacing placeholder for ${lang_name} ${char}${NC}"
             else
                 echo -e "⊘ Skipping ${lang_name} ${char} (already exists)"
-                return 0
+                return 2
             fi
         else
             echo -e "⊘ Skipping ${lang_name} ${char} (already exists)"
-            return 0
+            return 2
         fi
     fi
     
-    # Create temporary WAV file
-    local temp_wav="/tmp/keyboard_baby_${lang}_${char}.wav"
+    # Create temporary WAV file securely
+    local temp_wav=$(mktemp /tmp/keyboard_baby_${lang}_XXXXXX.wav)
     
     # Generate speech with espeak-ng
     # Use language-specific voice settings
@@ -132,8 +133,11 @@ generate_all() {
     
     # Generate numbers 0-9
     for i in {0..9}; do
-        if generate_audio "$i" "$lang_code" "$lang_name" "$output_dir/${i}.mp3"; then
+        result=$(generate_audio "$i" "$lang_code" "$lang_name" "$output_dir/${i}.mp3"; echo $?)
+        if [ "$result" -eq 0 ]; then
             ((generated++))
+        elif [ "$result" -eq 2 ]; then
+            ((skipped++))
         else
             ((failed++))
         fi
@@ -141,8 +145,11 @@ generate_all() {
     
     # Generate letters A-Z
     for letter in {A..Z}; do
-        if generate_audio "$letter" "$lang_code" "$lang_name" "$output_dir/${letter}.mp3"; then
+        result=$(generate_audio "$letter" "$lang_code" "$lang_name" "$output_dir/${letter}.mp3"; echo $?)
+        if [ "$result" -eq 0 ]; then
             ((generated++))
+        elif [ "$result" -eq 2 ]; then
+            ((skipped++))
         else
             ((failed++))
         fi
