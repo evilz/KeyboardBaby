@@ -48,26 +48,26 @@ function Test-Requirements {
         $missing = $true
     }
     
-    # Check for ffmpeg
-    try {
-        $null = Get-Command ffmpeg -ErrorAction Stop
-        Write-Host "✓ ffmpeg found" -ForegroundColor Green
-    }
-    catch {
-        Write-Host "✗ ffmpeg not found" -ForegroundColor Red
-        Write-Host "  Install with: winget install ffmpeg" -ForegroundColor Yellow
-        Write-Host "  Or download from: https://ffmpeg.org/download.html" -ForegroundColor Yellow
-        $missing = $true
-    }
+    # # Check for ffmpeg
+    # try {
+    #     $null = Get-Command ffmpeg -ErrorAction Stop
+    #     Write-Host "✓ ffmpeg found" -ForegroundColor Green
+    # }
+    # catch {
+    #     Write-Host "✗ ffmpeg not found" -ForegroundColor Red
+    #     Write-Host "  Install with: winget install ffmpeg" -ForegroundColor Yellow
+    #     Write-Host "  Or download from: https://ffmpeg.org/download.html" -ForegroundColor Yellow
+    #     $missing = $true
+    # }
     
-    if ($missing) {
-        Write-Host ""
-        Write-Host "Note: If you cannot install these tools, consider:" -ForegroundColor Yellow
-        Write-Host "  1. Using the Python script: python scripts\generate_audio.py"
-        Write-Host "  2. Downloading from free resources (see sound\AUDIO_SOURCES.md)"
-        Write-Host "  3. Recording manually"
-        exit 1
-    }
+    # if ($missing) {
+    #     Write-Host ""
+    #     Write-Host "Note: If you cannot install these tools, consider:" -ForegroundColor Yellow
+    #     Write-Host "  1. Using the Python script: python scripts\generate_audio.py"
+    #     Write-Host "  2. Downloading from free resources (see sound\AUDIO_SOURCES.md)"
+    #     Write-Host "  3. Recording manually"
+    #     exit 1
+    # }
     
     Write-Host ""
 }
